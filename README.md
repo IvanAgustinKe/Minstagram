@@ -60,5 +60,7 @@ Inicialmente, se planeaba utilizar MockAPI como el servicio para manejar las pub
 - **Indicador de Conectividad**: El botón de "Publicar" está deshabilitado si el dispositivo no tiene conexión a Internet.
 
 
-![Ejemplo1](https://github.com/user-attachments/assets/33a62a11-f3cd-43cf-ba43-82e5e8e13545)
+![screenshot390x790](https://github.com/user-attachments/assets/4b40d3e9-363a-4a00-99b7-31cf4573c6aa)
+![screenshot660x1000](https://github.com/user-attachments/assets/30b469ae-571d-4108-8a1e-591651f41325)
+![screenshot1200x840](https://github.com/user-attachments/assets/bceb900e-d7d4-4027-86ba-552f14b34d3b)
 ![Ejemplo2](https://github.com/user-attachments/assets/d36d2fe4-5e65-415e-aa73-97fa2b76d823)
