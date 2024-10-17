@@ -2,7 +2,7 @@
 
 ## Descripción
 
-Minstagram es una aplicación progresiva (PWA) que simula una versión simplificada de Instagram, permitiendo a los usuarios capturar y publicar fotos con títulos. Esta aplicación tiene un diseño responsive y está optimizada para su uso en dispositivos móviles y escritorios. Incluye funcionalidades como el uso de la cámara del dispositivo, almacenamiento de las imágenes en formato Base64, y una interfaz moderna similar a la de Instagram.
+Minstagram es una aplicación progresiva (PWA) sencilla que simula una versión simplificada de Instagram, permitiendo a los usuarios capturar y publicar fotos con títulos. Esta aplicación tiene un diseño responsive y está optimizada para su uso en dispositivos móviles y escritorios. Incluye funcionalidades como el uso de la cámara del dispositivo, almacenamiento de las imágenes en formato Base64, y una interfaz moderna similar a la de Instagram.
 
 ## Tecnologías Utilizadas
 
