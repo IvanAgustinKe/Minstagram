@@ -58,3 +58,7 @@ Inicialmente, se planeaba utilizar MockAPI como el servicio para manejar las pub
 - **Capturar y Publicar**: Desde `camara.html`, los usuarios pueden capturar una nueva imagen y publicarla.
 - **Editar y Eliminar**: Los usuarios pueden modificar el título de una publicación o eliminarla si así lo desean.
 - **Indicador de Conectividad**: El botón de "Publicar" está deshabilitado si el dispositivo no tiene conexión a Internet.
+
+
+![Ejemplo1](https://github.com/user-attachments/assets/33a62a11-f3cd-43cf-ba43-82e5e8e13545)
+![Ejemplo2](https://github.com/user-attachments/assets/d36d2fe4-5e65-415e-aa73-97fa2b76d823)
