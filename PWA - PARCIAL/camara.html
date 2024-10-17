@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Captura de Foto</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="icon" type="image/png" href="icon-64.png" />
+    <link rel="manifest" href="manifest.json">
+  </head>
+  <body>
+    <header>
+      <h1>Minstagram</h1>
+    </header>
+    <main>
+      <section class="photo-preview">
+        <img
+          id="preview"
+          src="https://via.placeholder.com/150"
+          alt="Previsualización de la imagen"
+        />
+        <input
+          type="file"
+          accept="image/*"
+          id="fileInput"
+          capture="environment"
+        />
+        <input type="text" id="photoTitle" placeholder="Titulo para la imagen" />
+      </section>
+
+      <section class="controls">
+        <button id="cancelBtn">Cancelar</button>
+        <button id="postBtn" disabled>Publicar</button>
+      </section>
+    </main>
+
+    <footer class="footer d-flex justify-content-around align-items-center">
+      <button id="homeIcon" class="footer-icon btn">
+        <i class="bi bi-house-door-fill"></i>
+      </button>
+      <button id="searchIcon" class="footer-icon btn">
+        <i class="bi bi-search"></i>
+      </button>
+      <button id="addPostIcon" class="footer-icon btn">
+        <i class="bi bi-plus-square"></i>
+      </button>
+      <button id="heartIcon" class="footer-icon btn">
+        <i class="bi bi-heart"></i>
+      </button>
+      <button id="profileIcon" class="footer-icon btn">
+        <i class="bi bi-person-circle"></i>
+      </button>
+    </footer>
+    
+
+    <!-- Bootstrap & Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css"
+    />
+
+    <script>
+      const fileInput = document.getElementById("fileInput");
+      const preview = document.getElementById("preview");
+      const postBtn = document.getElementById("postBtn");
+      let base64Image = "";
+
+     
+      fileInput.addEventListener("change", function (event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onloadend = function () {
+          preview.src = reader.result; 
+          base64Image = reader.result; 
+          postBtn.disabled = false; 
+        };
+
+        if (file) {
+          reader.readAsDataURL(file); 
+        }
+      });
+
+      
+      document.getElementById("cancelBtn").onclick = function () {
+        window.location.href = "/index.html";
+      };
+
+     
+      document.getElementById("postBtn").onclick = function () {
+        const title = document.getElementById("photoTitle").value;
+        if (title && base64Image) {
+          const postData = {
+            imagen: base64Image,
+            fecha: new Date().toLocaleString(),
+            titulo: title,
+          };
+          console.log('Datos a enviar:', postData); 
+          fetch('http://localhost:3000/posts', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(postData),
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Error en la respuesta del servidor');
+              }
+              return response.json();
+            })
+            .then((data) => {
+              console.log('Respuesta del servidor:', data); 
+              window.location.href = '/index.html'; 
+            })
+            .catch((error) => {
+              console.error('Error al publicar:', error);
+              alert('Error al publicar la imagen. Inténtalo de nuevo.');
+            });
+        } else {
+          alert('Por favor, ingresa un título y captura una imagen.');
+        }
+      };
+
+      
+      function updateOnlineStatus() {
+        if (navigator.onLine) {
+          postBtn.disabled = false;
+        } else {
+          postBtn.disabled = true;
+        }
+      }
+
+      document.getElementById('homeIcon').onclick = function() {
+        window.location.href = '/index.html'; 
+      };
+      document.getElementById('addPostIcon').onclick = function() {
+        window.location.href = '/index.html'; 
+      };
+      document.getElementById('profileIcon').onclick = function() {
+        window.location.href = '/index.html'; 
+      };
+      document.getElementById('heartIcon').onclick = function() {
+        window.location.href = '/index.html'; 
+      };
+      document.getElementById('searchIcon').onclick = function() {
+        window.location.href = '/index.html'; 
+      };
+      window.addEventListener('online', updateOnlineStatus);
+      window.addEventListener('offline', updateOnlineStatus);
+      updateOnlineStatus();
+    </script>
+  </body>
+</html>

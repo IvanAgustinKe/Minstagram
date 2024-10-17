@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Minstagram-Sandiyu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="icon" type="image/png" href="icon-64.png">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <header>
+    <h1>Minstagram</h1>
+  </header>
+
+  <main>
+    <section class="reel" id="reel">
+    </section>
+
+    <button id="newPhotoBtn" class="btn btn-primary btn-lg d-flex align-items-center justify-content-center">
+      <i class="bi bi-camera-fill me-2"></i> Capturar nueva foto
+    </button>
+  </main>
+
+  <footer class="footer d-flex justify-content-around align-items-center">
+    <button id="homeIcon" class="footer-icon btn">
+      <i class="bi bi-house-door-fill"></i>
+    </button>
+    <button id="searchIcon" class="footer-icon btn">
+      <i class="bi bi-search"></i>
+    </button>
+    <button id="addPostIcon" class="footer-icon btn">
+      <i class="bi bi-plus-square"></i>
+    </button>
+    <button id="heartIcon" class="footer-icon btn">
+      <i class="bi bi-heart"></i>
+    </button>
+    <button id="profileIcon" class="footer-icon btn">
+      <i class="bi bi-person-circle"></i>
+    </button>
+  </footer>
+
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css"
+/>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const reel = document.getElementById('reel');
+      fetch('http://localhost:3000/posts')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Error al obtener los datos del servidor');
+          }
+          return response.json();
+        })
+        .then(posts => {
+          console.log(posts); 
+          if (posts.length === 0) {
+            const noPostsMessage = document.createElement('p');
+            noPostsMessage.textContent = "No hay publicaciones aún.";
+            reel.appendChild(noPostsMessage);
+          } else {
+            posts.forEach(post => {
+              const card = document.createElement('div');
+              card.classList.add('card');
+              card.dataset.id = post.id;
+              card.innerHTML = `
+                <h2 class="title">${post.titulo}</h2>
+                <img src="${post.imagen}" alt="Imagen del post">
+                <p class="date">${post.fecha}</p>
+                <div id="divbotones">
+                <button id="edit" class="editBtn">Editar</button>
+                <button id="deletes" class="deleteBtn">Eliminar</button>
+                </div>
+                `;
+              card.querySelector('.deleteBtn').addEventListener('click', function() {
+                const postId = card.dataset.id;
+                fetch(`http://localhost:3000/posts/${postId}`, {
+                  method: 'DELETE'
+                })
+                .then(response => {
+                  if (!response.ok) {
+                    throw new Error('Error al eliminar el post');
+                  }
+                  reel.removeChild(card);
+                })
+                .catch(error => {
+                  console.error('Error al eliminar el post:', error);
+                });
+              });
+              card.querySelector('.editBtn').addEventListener('click', function() {
+                const newTitle = prompt('Ingresa el nuevo título:', post.titulo);
+                if (newTitle) {
+                  const updatedPost = {
+                    ...post,
+                    titulo: newTitle,
+                    fecha: new Date().toLocaleString()
+                  };
+
+                  fetch(`http://localhost:3000/posts/${post.id}`, {
+                    method: 'PUT',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(updatedPost)
+                  })
+                  .then(response => {
+                    if (!response.ok) {
+                      throw new Error('Error al actualizar el post');
+                    }
+                    return response.json();
+                  })
+                  .then(data => {
+                    card.querySelector('.title').textContent = data.titulo;
+                    card.querySelector('.date').textContent = data.fecha;
+                  })
+                  .catch(error => {
+                    console.error('Error al actualizar el post:', error);
+                  });
+                }
+              });
+              reel.appendChild(card);
+            });
+          }
+        })
+        .catch(error => {
+          console.error('Error al cargar las publicaciones:', error);
+        });
+
+        document.getElementById('homeIcon').onclick = function() {
+        window.location.href = '/index.html'; 
+      };
+      document.getElementById('addPostIcon').onclick = function() {
+        window.location.href = '/camara.html'; 
+      };
+      document.getElementById('profileIcon').onclick = function() {
+        window.location.href = '/index.html'; 
+      };
+
+      document.getElementById('searchIcon').onclick = function() {
+        window.location.href = '/index.html'; 
+      };
+
+      document.getElementById('heartIcon').onclick = function() {
+        window.location.href = '/index.html'; 
+      };
+      document.getElementById('newPhotoBtn').onclick = function() {
+        window.location.href = '/camara.html'; 
+      };
+    });
+
+  </script>
+</body>
+</html>
