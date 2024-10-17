@@ -31,7 +31,7 @@ Minstagram es una aplicación progresiva (PWA) que simula una versión simplific
 
 ## Uso de JSON Server
 
-Inicialmente, se planeaba utilizar MockAPI como el servicio para manejar las publicaciones (GET y POST). Sin embargo, se descubrió que la funcionalidad de realizar operaciones POST con MockAPI requiere una suscripción paga, lo cual no se alineaba con el objetivo de crear una solución accesible y gratuita para los estudiantes. Por lo tanto, se optó por JSON Server, que es una solución local gratuita que nos permite simular una API REST con todas las funcionalidades CRUD (GET, POST, PUT, DELETE). Esta elección permitió desarrollar todas las funcionalidades requeridas sin restricciones, manteniendo la experiencia lo más cercana posible al uso de una API real.
+Inicialmente, se planeaba utilizar MockAPI como el servicio para manejar las publicaciones (GET y POST). Sin embargo, se descubrió que la funcionalidad de realizar operaciones POST con MockAPI requiere una suscripción paga. Por lo tanto, se optó por JSON Server, que es una solución local gratuita que nos permite simular una API REST con todas las funcionalidades CRUD (GET, POST, PUT, DELETE). Esta elección permitió desarrollar todas las funcionalidades requeridas sin restricciones, manteniendo la experiencia lo más cercana posible al uso de una API real.
 
 ## Instalación del Proyecto
 
