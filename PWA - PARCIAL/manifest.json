@@ -48,21 +48,21 @@
             "sizes": "389x790",
             "type": "image/png",
             "form_factor": "narrow",
-            "label": "Espero te prendas en versión mobile"
+            "label": "Minstagram en versión mobile"
         },
         {
             "src": "./images/screenshot441x625.png",
             "sizes": "441x625",
             "type": "image/png",
             "form_factor": "narrow",
-            "label": "Espero te prendas en versión mobile"
+            "label": "Minstagram en versión mobile"
         },
         {
             "src": "./images/screenshot1623x992.png",
             "sizes": "1623x992",
             "type": "image/png",
             "form_factor": "wide",
-            "label": "Espero te prendas para computadoras de escritorio"
+            "label": "Minstagram  para computadoras de escritorio"
         }
     ],
     "permissions": [
